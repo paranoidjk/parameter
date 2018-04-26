@@ -1,6 +1,6 @@
 {
-  "name": "parameter",
-  "version": "2.2.1",
+  "name": "parameter-interface",
+  "version": "0.0.1",
   "description": "A parameter verify tools.",
   "main": "index.js",
   "files": [
@@ -12,7 +12,9 @@
     "ci": "npm run cov",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "dependencies": {},
+  "dependencies": {
+    "prettier": "^1.12.1"
+  },
   "devDependencies": {
     "beautify-benchmark": "0",
     "benchmark": "*",

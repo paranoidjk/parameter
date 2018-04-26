@@ -1,5 +1,6 @@
 'use strict';
 
+
 /**
  * Parameter class
  * @class Parameter
@@ -24,18 +25,18 @@ class ParameterToInterface {
     for (var key in rules) {
       var rule = formatRule(rules[key]);
 
-      let leftStr = `${key}${rule.require ? '' : '?'}: `;
+      let leftStr = `${key}${rule.required === false ? '?' : ''}: `;
 
       var spec_transfrom = TYPE_MAP[rule.type];
-      if (!checker) {
+      if (!spec_transfrom) {
         throw new TypeError('rule type must be one of ' + Object.keys(TYPE_MAP).join(', ') +
           ', but the following type was passed: ' + rule.type);
       }
 
-      var rightStr = spec_transfrom.call(self, rule, obj[key], obj);
+      var rightStr = spec_transfrom.call(self, rule);
       result.push(leftStr + rightStr);
     }
-    return '{\n' + result.join('\n') + '}';
+    return '{\n ' + result.join('\n') + '\n' + '}';
   }
 };
 
@@ -43,7 +44,7 @@ class ParameterToInterface {
  * Module exports
  * @type {Function}
  */
-module.exports = Parameter;
+module.exports = ParameterToInterface;
 
 
 /**
@@ -314,5 +315,5 @@ function checkArray(rule) {
 
   var itemResult = this.transform(subRule);
 
-  return `${itemResult}[]`;
+  return itemResult + '[]';
 }

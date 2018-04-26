@@ -1,0 +1,3 @@
+interface Parameter {
+  int?: number;
+}
